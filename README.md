@@ -1,5 +1,2 @@
-#### Backend Server
-// TODO 
-   1. complete the foreign key mapped in the domain layer
-   2. get USER ID by JWT in the Controller
-   3. build angular component displaying employee's info
+Visa Application Management Full-stack project.
+This is a full-stack application which runs Angular in front-end and Spring Boot in the back-end and it store in MySQL database using AWS RDS, AWS S3.
