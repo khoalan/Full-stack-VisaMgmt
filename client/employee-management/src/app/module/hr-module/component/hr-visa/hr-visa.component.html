@@ -1,0 +1,84 @@
+<app-hr-home></app-hr-home>
+<h3>Visa Status Table</h3>
+<table class="table table-striped">
+  <thead>
+    <th>No.</th>
+    <th>Name</th>
+    <th>Work Authorization</th>
+    <th>Expiration Date</th>
+    <th>Day Left</th>
+    <th>Action Required</th>
+  </thead>
+  <tbody>
+    <tr
+      *ngFor="let app of appWorkFlows; index as i"
+      (click)="onClick(app.userId)"
+    >
+      <td>{{ i + 1 }}</td>
+      <td>{{ app.firstname }} {{ app.lastname }}</td>
+      <td>{{ app.workAuth }}</td>
+      <td>{{ app.visaExpirationdate }}</td>
+      <td>{{ app.dayLeft }}</td>
+      <td><button (click)="onSendNoti(rowIndex)">Send notification</button></td>
+    </tr>
+  </tbody>
+</table>
+<ng-container *ngIf="expanded">
+  <div class="row">
+    <div class="col-md-4">
+      <label for="">Name:</label>
+      <input
+        type="text"
+        value="{{ userApp.firstname }} {{ userApp.lastname }}"
+        disabled
+      />
+      <br />
+      <label for="">Visa:</label>
+      <input type="text" value="{{ userApp.visa }}" disabled />
+      <br />
+      <label for="">Start date:</label>
+      <input type="text" value="{{ userApp.startdate }}" disabled />
+      <br />
+      <label for="">End date:</label>
+      <input type="text" value="{{ userApp.visaExpirationdate }}" disabled />
+    </div>
+
+    <div class="col-md-3">
+      <p>Documents:</p>
+      <div *ngFor="let doc of visaDocument">
+        <a href="{{ doc.docUrl }}" target="popup">{{ doc.docName }}</a>
+      </div>
+      <p>Next step:</p>
+      <p style="color: red; font-size: large">{{ nextStep }}</p>
+    </div>
+
+    <div class="col-md-3">
+      <form #hrComment="ngForm" (ngSubmit)="onComment(hrComment, rowIndex)">
+        <label for="">Add comments for this application:</label>
+        <input
+          id="commentInput"
+          name="comment"
+          type="text"
+          width="48"
+          height="48"
+          ngModel
+        />
+        <br />
+        <button type="submit">Comment</button>
+      </form>
+      <br />
+      <button
+        class="btn btn-primary"
+        style="margin-right: 5px"
+        (click)="onApprove(rowIndex)"
+      >
+        Approve
+      </button>
+
+      <button class="btn btn-danger" (click)="onReject(rowIndex, wrongDoc)">
+        Reject
+      </button>
+    </div>
+  </div>
+</ng-container>
+<div style="margin-top: 40px"></div>

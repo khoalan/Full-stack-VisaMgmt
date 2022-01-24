@@ -1,0 +1,27 @@
+<h1>HR management</h1>
+<nav>
+  <a class="btn btn-primary" routerLink="/hr" routerLinkActive="active">Home</a>
+  &nbsp;
+  <a
+    class="btn btn-success"
+    routerLink="/hr/hire/user"
+    routerLinkActive="active"
+    >Employee Profile</a
+  >
+  &nbsp;
+  <a class="btn btn-success" routerLink="/hr/visa" routerLinkActive="active"
+    >Visa Status Management</a
+  >
+  &nbsp;
+  <a class="btn btn-success" routerLink="/hr/hire" routerLinkActive="active"
+    >Hire</a
+  >
+  &nbsp;
+  <a
+    class="btn btn-danger"
+    routerLink="/"
+    routerLinkActive="active"
+    (click)="onLogOut()"
+    >Log out</a
+  >
+</nav>

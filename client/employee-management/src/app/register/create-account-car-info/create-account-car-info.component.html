@@ -1,0 +1,58 @@
+<h3>Car Info</h3>
+<form [formGroup]="carInfoForm" (ngSubmit)="onSubmit()">
+  <p>Do you have a driver license?(*)</p>
+  <div>
+    <label for="yes">yes</label>
+    <input
+      id="yes"
+      type="radio"
+      name="option"
+      value="yes"
+      formControlName="option"
+    />
+    <label for="no">no</label>
+    <input
+      id="no"
+      type="radio"
+      name="option"
+      value="no"
+      formControlName="option"
+    />
+  </div>
+
+  <div *ngIf="f['option'].value == 'yes'">
+    <label>Driver license number(*)</label>
+    <input type="text" formControlName="licensenum" />
+    <div *ngIf="submitted && f['licensenum'].errors">
+      <div *ngIf="f['licensenum'].errors">License number is required.</div>
+    </div>
+    <br />
+    <label>Expiration date(*)</label>
+    <input type="date" formControlName="expirationdate" />
+    <div *ngIf="submitted && f['expirationdate'].errors">
+      <div *ngIf="f['expirationdate'].errors">Expiration Date is required.</div>
+    </div>
+    <br />
+    <div>
+      <label for="driverlicense">Upload a copy of your driver License</label>
+      <br />
+      <input
+        id="driverlicense"
+        type="file"
+        (change)="onUpload($any($event.target).files)"
+        name="files"
+      />
+      <div *ngIf="submitted && f['driverlicense'].errors">
+        <div *ngIf="f['driverlicense'].errors">Driver License is required.</div>
+      </div>
+    </div>
+  </div>
+
+  <label for="carnum1">Car: </label>
+  <input type="text" formControlName="carnum1" />-<input
+    type="text"
+    formControlName="carnum2"
+  />-<input type="text" formControlName="carnum3" />
+  <br />
+  <button>>Next</button>
+</form>

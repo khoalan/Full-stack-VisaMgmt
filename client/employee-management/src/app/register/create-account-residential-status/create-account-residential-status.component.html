@@ -1,0 +1,97 @@
+<h3>Residential status</h3>
+<form [formGroup]="residentialInfoForm" (ngSubmit)="onSubmit()">
+  <p>Are you a citizen or permanent resident of the US?</p>
+  <div>
+    <label for="yes">yes</label>
+    <input
+      id="yes"
+      type="radio"
+      name="option"
+      value="yes"
+      formControlName="option"
+    />
+    <label for="no">no</label>
+    <input
+      id="no"
+      type="radio"
+      name="option"
+      value="no"
+      formControlName="option"
+    />
+    <div *ngIf="submitted && f['option'].errors">
+      <div *ngIf="f['option'].errors">Selection is required.</div>
+    </div>
+  </div>
+
+  <div *ngIf="f['option'].value == 'yes'">
+    <label for="yes">CitizenShip</label>
+    <input
+      id="yes"
+      type="radio"
+      name="status"
+      value="citizenship"
+      formControlName="status"
+    />
+    <label for="no">GreenCard</label>
+    <input
+      id="no"
+      type="radio"
+      name="status"
+      value="greencard"
+      formControlName="status"
+    />
+    <label for="yes">Citizen</label>
+    <input
+      id="yes"
+      type="radio"
+      name="status"
+      value="citizen"
+      formControlName="status"
+    />
+    <div *ngIf="submitted && f['status'].errors">
+      <div *ngIf="f['status'].errors">Selection is required.</div>
+    </div>
+  </div>
+
+  <div *ngIf="f['option'].value == 'no'">
+    <label for="workauth">What is your work authorization? </label>
+    <select id="workauth" formControlName="workauth">
+      <option value="H1-B" selected>H1-B</option>
+      <option value="L2">L2</option>
+      <option value="F1(CPT/OPT)">F1(CPT/OPT)</option>
+      <option value="H4">H4</option>
+      <option value="Other">Other</option>
+    </select>
+    <br />
+    <label>Start date(*)</label>
+    <input type="date" formControlName="startdate" />
+    <div *ngIf="submitted && f['startdate'].errors">
+      <div *ngIf="f['startdate'].errors">Start Date is required.</div>
+    </div>
+    <br />
+    <label>Expiration date(*)</label>
+    <input type="date" formControlName="expiredate" />
+    <div *ngIf="submitted && f['expiredate'].errors">
+      <div *ngIf="f['expiredate'].errors">Expiration Date is required.</div>
+    </div>
+    <br />
+    <div>
+      <label for="workauthfile">Upload a copy of your work authorization</label>
+      <br />
+      <input
+        id="workauthfile"
+        type="file"
+        type="file"
+        (change)="onUpload($any($event.target).files)"
+        name="files"
+      />
+      <div *ngIf="submitted && f['workauthfile'].errors">
+        <div *ngIf="f['workauthfile'].errors">
+          Work authorization file is required.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button>>Next</button>
+</form>

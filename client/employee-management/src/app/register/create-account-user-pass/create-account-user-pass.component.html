@@ -1,0 +1,33 @@
+<h3>Register</h3>
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <!-- username input -->
+  <label for="usernameBox">Username: </label>
+  <input
+    id="usernameBox"
+    type="text"
+    placeholder="Username"
+    formControlName="username"
+    [ngClass]="{ 'is-invalid': submitted && f['username'].errors }"
+  />
+  <div *ngIf="submitted && f['username'].errors">
+    <div *ngIf="f['username'].errors">Username is required.</div>
+  </div>
+  <br />
+  <!-- password -->
+  <label for="passwordBox">Password: </label>
+  <input
+    id="passwordBox"
+    type="text"
+    placeholder="Password"
+    formControlName="password"
+    [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
+  />
+  <div *ngIf="submitted && f['password'].errors">
+    <div *ngIf="f['password'].errors">Password is required.</div>
+  </div>
+
+  <br />
+
+  <!-- submit button -->
+  <button>Next</button>
+</form>

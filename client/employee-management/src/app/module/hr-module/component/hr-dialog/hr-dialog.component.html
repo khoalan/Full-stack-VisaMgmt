@@ -1,0 +1,12 @@
+<h4>Upload I-983 form:</h4>
+<input
+  id="receipt"
+  type="file"
+  (change)="onUpload($any($event.target).files)"
+  name="files"
+/>
+<br />
+<br />
+<div>
+  <button (click)="onSubmit()">submit</button>
+</div>

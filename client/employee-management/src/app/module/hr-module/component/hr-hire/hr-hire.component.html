@@ -1,0 +1,167 @@
+<app-hr-home></app-hr-home>
+<h3>Generate Token</h3>
+<form [formGroup]="tokenForm" (ngSubmit)="onGenerateToken()">
+  <label for="email_input">Email Address</label>
+  <input type="text" id="email_input" formControlName="email" />
+  <div *ngIf="submitted && f['email'].errors">
+    <div *ngIf="f['email'].errors">Email is required.</div>
+  </div>
+  <br />
+  <button type="submit" class="btn">Generate Token</button>
+</form>
+
+<h3>Review Applications</h3>
+<!-- application reviews -->
+
+<table class="table table-striped">
+  <thead>
+    <th>No.</th>
+    <th>Name</th>
+    <th>Work Authorization</th>
+    <th>Application type</th>
+    <th>Status</th>
+  </thead>
+  <tbody>
+    <tr
+      *ngFor="let app of appWorkFlows; index as i"
+      (click)="onClick(app.userId)"
+    >
+      <td>{{ i + 1 }}</td>
+      <td>{{ app.firstname }} {{ app.lastname }}</td>
+      <td>{{ app.workAuth }}</td>
+      <td>Onboarding</td>
+      <td>{{ app.status }}</td>
+    </tr>
+  </tbody>
+</table>
+<ng-container *ngIf="expanded">
+  <div class="row">
+    <div class="col-md-7">
+      <mat-tab-group disableRipple="true" mat-align-tabs="start">
+        <mat-tab label="Basic Info">
+          <img
+            src="{{ userApp.avatar }}"
+            style="max-width: 140px; max-height: 140px"
+            alt="avatar"
+          />
+          <br />
+          <label for="">Firstname:</label>
+          <input type="text" value="{{ userApp.firstname }}" disabled />
+          <br />
+          <label for="">Lastname:</label>
+          <input type="text" value="{{ userApp.lastname }}" disabled />
+          <br />
+          <label for="">middlename:</label>
+          <input type="text" value="{{ userApp.middlename }}" disabled />
+          <br />
+          <label for="">ssn:</label>
+          <input type="text" value="{{ userApp.ssn }}" disabled />
+          <br />
+          <label for="">dob:</label>
+          <input type="text" value="{{ userApp.dob }}" disabled />
+          <br />
+          <label for="">gender:</label>
+          <input type="text" value="{{ userApp.gender }}" disabled />
+        </mat-tab>
+        <mat-tab label="Contact Info">
+          <label for="">cellphone:</label>
+          <input type="text" value="{{ userApp.cellphone }}" disabled />
+          <br />
+          <label for="">workphone:</label>
+          <input type="text" value="{{ userApp.workphone }}" disabled />
+          <br />
+          <label for="">address1:</label>
+          <input type="text" value="{{ userApp.address1 }}" disabled />
+          <br />
+          <label for="">address2:</label>
+          <input type="text" value="{{ userApp.address2 }}" disabled />
+          <br />
+          <label for="">city:</label>
+          <input type="text" value="{{ userApp.city }}" disabled />
+          <br />
+          <label for="">state:</label>
+          <input type="text" value="{{ userApp.state }}" disabled />
+          <br />
+          <label for="">zipcode:</label>
+          <input type="text" value="{{ userApp.zipcode }}" disabled />
+          <br />
+          <label for="">email:</label>
+          <input type="text" value="{{ userApp.email }}" disabled />
+        </mat-tab>
+        <mat-tab label="Residential Status">
+          <label for="">visa:</label>
+          <input type="text" value="{{ userApp.visa }}" disabled />
+          <br />
+          <label for="">startdate:</label>
+          <input type="text" value="{{ userApp.startdate }}" disabled />
+          <br />
+          <label for="">visaExpirationdate:</label>
+          <input
+            type="text"
+            value="{{ userApp.visaExpirationdate }}"
+            disabled
+          />
+          <div *ngIf="!noVisaDoc">
+            <a href="{{ userApp.visaDoc }} " target="popup">Visa Document</a>
+          </div>
+        </mat-tab>
+        <mat-tab label="Car Info">
+          <label for="">licensenum:</label>
+          <input type="text" value="{{ userApp.licensenum }}" disabled />
+          <br />
+          <label for="">expirationdate:</label>
+          <input type="text" value="{{ userApp.expirationdate }}" disabled />
+          <br />
+          <label for="">carnum:</label>
+          <input type="text" value="{{ userApp.carnum }}" disabled />
+
+          <div *ngIf="!noDriverDoc">
+            <a href="{{ userApp.driverLicense }} " target="popup"
+              >Driver license</a
+            >
+          </div>
+        </mat-tab>
+        <mat-tab label="Contact Person">
+          <label for="">address1:</label>
+          <input type="text" value="{{ userApp.address1 }}" disabled />
+          <br />
+          <label for="">address2:</label>
+          <input type="text" value="{{ userApp.address2 }}" disabled />
+          <br />
+          <label for="">city:</label>
+          <input type="text" value="{{ userApp.city }}" disabled />
+          <br />
+          <label for="">state:</label>
+          <input type="text" value="{{ userApp.state }}" disabled />
+          <br />
+          <label for="">zipcode:</label>
+          <input type="text" value="{{ userApp.zipcode }}" disabled />
+          <br />
+          <label for="">Email:</label>
+          <input type="text" value="emergency@gmail.com" disabled />
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+    <div class="col-md-5">
+      <form action="">
+        <label for="">Add comments for this application:</label>
+        <input id="commentInput" type="text" width="48" height="48" />
+        <br />
+        <button>Comment</button>
+      </form>
+      <br />
+      <button
+        class="btn btn-primary"
+        style="margin-right: 5px"
+        (click)="onApprove(rowIndex)"
+      >
+        Approve
+      </button>
+
+      <button class="btn btn-danger" (click)="onReject(rowIndex)">
+        Reject
+      </button>
+    </div>
+  </div>
+</ng-container>
+<div style="margin-top: 40px"></div>

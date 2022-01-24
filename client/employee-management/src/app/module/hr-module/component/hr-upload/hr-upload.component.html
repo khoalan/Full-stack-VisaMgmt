@@ -1,0 +1,48 @@
+<app-hr-home></app-hr-home>
+<h3>Visa Status Table</h3>
+<table class="table table-striped">
+  <thead>
+    <th>No.</th>
+    <th>Name</th>
+    <th>Work Authorization</th>
+    <th>Expiration Date</th>
+    <th>Day Left</th>
+    <th>I-983</th>
+    <th>Action Required</th>
+  </thead>
+  <tbody>
+    <tr
+      *ngFor="let app of appWorkFlows; index as i"
+      (click)="onClick(app.userId)"
+    >
+      <td>{{ i + 1 }}</td>
+      <td>{{ app.firstname }} {{ app.lastname }}</td>
+      <td>{{ app.workAuth }}</td>
+      <td>{{ app.visaExpirationdate }}</td>
+      <td>{{ app.dayLeft }}</td>
+      <td>
+        <button
+          class="btn btn-info"
+          mat-raised-button
+          (click)="openDialog(app.userId)"
+        >
+          Upload
+        </button>
+        <a class="btn btn-primary" href="{{ my983Form }}" target="popup"
+          >Download</a
+        >
+      </td>
+      <td>
+        <button class="btn btn-danger" (click)="onSendNoti(rowIndex)">
+          Send notification
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div class="container text-center">
+  <img
+    src="https://www.financetalk.net/wp-content/uploads/2020/08/human-resources.jpg"
+    style="max-width: 80%"
+  />
+</div>

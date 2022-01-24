@@ -1,0 +1,492 @@
+<style xmlns:trackBy="http://www.w3.org/1999/xhtml">
+  html,
+  body {
+    width: 100%;
+    height: 100%;
+  }
+  .background {
+    background-color: white;
+    text-align: center;
+    margin: auto;
+    flex-direction: column;
+    display: flex;
+    position: absolute;
+    margin-top: 100px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border: 3px solid orange;
+  }
+  /* .person_info {
+    background-color: white;
+  } */
+  .contact_info {
+    background-color: white;
+    flex-direction: row;
+  }
+  .employee {
+    background-color: white;
+  }
+  .editContact {
+    background-color: white;
+  }
+  .editAddress {
+    background-color: white;
+  }
+  .info {
+    flex-direction: row;
+    display: flex;
+    border: 1px outset black;
+    margin: 0 1px 1px 1px;
+  }
+  .holdInfo {
+    /* -webkit-column-count: 2;
+    -moz-column-count: 2; */
+    column-count: 2;
+    /* -webkit-column-gap: 5px;
+    -moz-column-gap: 3px; */
+    column-gap: 3px;
+    /* -webkit-column-rule: 1px solid #1c6ea4;
+    -moz-column-rule: 1px solid #1c6ea4; */
+    /* column-rule: 2px solid #1c6ea4; */
+  }
+
+  .masonry-grid {
+    /* It is split into 3 columns */
+    column-count: 3;
+
+    /* The space between columns */
+    column-gap: 1rem;
+    margin: auto;
+    /* Misc */
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    border: 1px outset grey;
+  }
+
+  .masonry-grid__item {
+    /* Prevent a column from breaking into multiple columns */
+    break-inside: avoid;
+    border: 1px outset black;
+    /* Misc */
+    margin: auto;
+  }
+</style>
+<app-employee-home></app-employee-home>
+<div class="background container">
+  <div class="masonry-grid">
+    <div class="masonry-grid__item">
+      <div>
+        <div class="person_info">
+          <h2>Personal Info</h2>
+          <div *ngFor="let item of persons">
+            <div class="holdInfo">
+              <div class="info">
+                <div>{{ "first: " + item.firstName }}</div>
+              </div>
+              <div class="info">
+                <div>{{ " last: " + item.lastName }}</div>
+              </div>
+
+              <div class="info">
+                <div>{{ "middle: " + item.middleName }}</div>
+              </div>
+              <div class="info">
+                <div>{{ "gender: " + item.gender }}</div>
+              </div>
+              <div class="info">
+                <div>{{ "ssn: " + item.ssn }}</div>
+              </div>
+              <div class="info">
+                <div>{{ "dob: " + item.dob }}</div>
+              </div>
+            </div>
+
+            <div *ngIf="perhidden">
+              <form (ngSubmit)="submitEditPerson()" [formGroup]="personForm">
+                <input
+                  id="1"
+                  type="hidden"
+                  formControlName="id"
+                  placeholder="enter id"
+                  value="{{ item.id }}"
+                  [(ngModel)]="item.id"
+                />
+                <br />
+                <label for="fn">firstname: </label>
+                <input
+                  id="fn"
+                  type="text"
+                  formControlName="firstName"
+                  placeholder="enter first name"
+                  value="{{ item.firstName }}"
+                  [(ngModel)]="item.firstName"
+                />
+                <br />
+                <label for="ln">lastname: </label>
+                <input
+                  id="ln"
+                  type="text"
+                  formControlName="lastName"
+                  placeholder="enter second name"
+                  value="{{ item.lastName }}"
+                  [(ngModel)]="item.lastName"
+                />
+                <br />
+                <label for="mn">middle name: </label>
+                <input
+                  id="mn"
+                  type="text"
+                  formControlName="middleName"
+                  value="{{ item.middleName }}"
+                  [(ngModel)]="item.middleName"
+                />
+                <br />
+                <label for="em">email: </label>
+                <input
+                  id="em"
+                  type="text"
+                  formControlName="email"
+                  value="{{ item.email }}"
+                  [(ngModel)]="item.email"
+                />
+                <br />
+                <label for="cp">phone: </label>
+                <input
+                  id="cp"
+                  type="text"
+                  formControlName="cellPhone"
+                  value="{{ item.cellPhone }}"
+                  [(ngModel)]="item.cellPhone"
+                />
+                <br />
+                <label for="ap">another phone: </label>
+                <input
+                  id="ap"
+                  type="text"
+                  formControlName="alternatePhone"
+                  value="{{ item.alternatePhone }}"
+                  [(ngModel)]="item.alternatePhone"
+                />
+                <br />
+                <label for="gd">gender: </label>
+                <input
+                  id="gd"
+                  type="text"
+                  formControlName="gender"
+                  placeholder="enter gender"
+                  value="{{ item.gender }}"
+                  [(ngModel)]="item.gender"
+                />
+                <br />
+                <label for="ssn">ssn: </label>
+                <input
+                  id="ssn"
+                  type="text"
+                  formControlName="ssn"
+                  value="{{ item.ssn }}"
+                  [(ngModel)]="item.ssn"
+                />
+                <br />
+                <label for="dob">dob: </label>
+                <input
+                  id="dob"
+                  type="text"
+                  formControlName="dob"
+                  value="{{ item.dob }}"
+                  [(ngModel)]="item.dob"
+                />
+                <br />
+                <input
+                  id="uid"
+                  type="hidden"
+                  formControlName="userId"
+                  value="{{ item.userId }}"
+                  [(ngModel)]="item.userId"
+                />
+                <br />
+                <button>Save</button>
+              </form>
+              <button (click)="cancelPerson()">Cancel</button>
+            </div>
+            <button (click)="showPersonEdit()">Edit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="masonry-grid__item">
+      <div class="contact_info">
+        <h2>Personal Contact Info</h2>
+        <div *ngFor="let item of persons">
+          <div class="holdInfo">
+            <div class="info">
+              {{ "Email: " + item.email }}
+            </div>
+            <div class="info">
+              {{ "Cell Phone: " + item.cellPhone }}
+            </div>
+            <div class="info">
+              {{ "Alter Phone: " + item.alternatePhone }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="masonry-grid__item">
+      <div class="employee">
+        <h2>Employee Info</h2>
+
+        <!-- <div class="head_div">
+			<img src="head.jpg" alt="avatar" />
+		  </div> -->
+        <img
+          src="{{ employee[0].avatar }}"
+          style="max-width: 140px; max-height: 140px"
+          alt="avatar"
+        />
+        <div *ngFor="let item of employee">
+          <div class="holdInfo">
+            <div class="info">
+              <div>{{ "Title: " + item.title }}</div>
+            </div>
+            <div class="info">
+              <div>{{ "Manager ID: " + item.managerId }}</div>
+            </div>
+            <div class="info">
+              <div>{{ "Start: " + item.startDate }}</div>
+            </div>
+            <div class="info">
+              <div>{{ "End: " + item.endDate }}</div>
+            </div>
+            <div class="info">
+              <div>{{ "Visa Status: " + item.visaStatusId }}</div>
+            </div>
+            <div class="info">
+              <div>{{ "Visa Start: " + item.visaStartDate }}</div>
+            </div>
+            <div class="info">
+              <div>{{ "Visa End: " + item.visaEndDate }}</div>
+            </div>
+          </div>
+        </div>
+
+        <button (click)="edit()">edit</button>
+        <div *ngIf="editAvt == true">
+          <h4>upload new avatar</h4>
+          <label for="avt">upload</label>
+          <input
+            id="avt"
+            type="file"
+            (change)="onUpload($any($event.target).files)"
+            name="avt"
+          />
+          <h5>submit when 100% uploaded</h5>
+          <h4>{{ this.progress + " %" }}</h4>
+          <div>
+            <button (click)="onSubmit()">submit</button>
+            <button (click)="cancelUploadAvt()">cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="masonry-grid">
+    <div class="masonry-grid__item">
+      <div class="editAddress">
+        <h2>Address List</h2>
+        <div *ngFor="let item of address">
+          <div class="holdInfo">
+            <div class="info">
+              <div>{{ item.id }}</div>
+            </div>
+            <div class="info">
+              <div>{{ item.addressLine1 }}</div>
+            </div>
+            <div class="info">
+              <div>{{ "line 1: " + item.addressLine2 }}</div>
+            </div>
+            <div class="info">
+              <div>{{ "line 2: " + item.addressLine2 }}</div>
+            </div>
+            <div class="info">
+              <div>{{ item.city }}</div>
+            </div>
+            <div class="info">
+              <div>{{ "zip " + item.zipCode }}</div>
+            </div>
+            <div class="info">
+              <div>{{ item.stateName }}</div>
+            </div>
+            <div class="info">
+              <div>{{ item.stateAbbr }}</div>
+            </div>
+            <div class="info">
+              <div>{{ item.personId }}</div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="addhidden">
+          <form (ngSubmit)="submitEditAddress()" [formGroup]="addressForm">
+            <label for="a_id">Id: </label>
+            <input
+              id="a_id"
+              type="number"
+              formControlName="id"
+              placeholder="enter id to modify"
+            />
+            <br />
+            <label for="add1">Add Line 1: </label>
+            <input
+              id="add1"
+              type="text"
+              formControlName="addLine1"
+              placeholder="enter your line 1"
+            />
+            <br />
+            <label for="add2">Add Line 2: </label>
+            <input
+              id="add2"
+              type="text"
+              formControlName="addLine2"
+              placeholder="enter your line 2"
+            />
+            <br />
+            <label for="city">City: </label>
+            <input id="city" type="text" formControlName="city" />
+            <br />
+            <label for="zip">Zipcode: </label>
+            <input
+              id="zip"
+              type="text"
+              formControlName="zipcode"
+              placeholder="enter zipcode"
+            />
+            <br />
+            <label for="sname">State Name: </label>
+            <input id="sname" type="text" formControlName="stateName" />
+            <br />
+            <label for="sabr">State Abbr: </label>
+            <input id="sabr" type="text" formControlName="stateAbbr" />
+            <br />
+            <label for="pid">Person Id: </label>
+            <input id="pid" type="text" formControlName="personId" />
+            <br />
+            <button>Save</button>
+          </form>
+          <button (click)="cancelAdd()">Cancel</button>
+        </div>
+        <button (click)="showAddEdit()">Edit</button>
+      </div>
+    </div>
+
+    <div class="masonry-grid__item">
+      <div class="editContact">
+        <h2>Emergency Contact Info</h2>
+        <div *ngFor="let item of contact">
+          <div class="holdInfo">
+            <div class="info">
+              <div>{{ "Relationship: " + item.relationship }}</div>
+            </div>
+            <div class="info">
+              <div>{{ "Title: " + item.title + " /" }}</div>
+            </div>
+            <div class="info">
+              <div>{{ "IsEmergency: " + item.isEmergency }}</div>
+            </div>
+            <div class="info">
+              <div>{{ "isRef: " + item.isReference }}</div>
+            </div>
+          </div>
+          <div *ngIf="conhidden">
+            <form (ngSubmit)="submitEditContact()" [formGroup]="contactForm">
+              <label for="id">id: </label>
+              <input
+                id="id"
+                type="hidden"
+                formControlName="cf_id"
+                placeholder="enter the id"
+                value="{{ item.id }}"
+                [(ngModel)]="item.id"
+              />
+              <br />
+              <label for="personid">Person Id: </label>
+              <input
+                id="personid"
+                type="hidden"
+                formControlName="cf_personId"
+                placeholder="enter the pid"
+                value="{{ item.personId }}"
+                [(ngModel)]="item.personId"
+              />
+              <br />
+              <label for="rela">Relationship: </label>
+              <input
+                id="rela"
+                type="text"
+                formControlName="cf_relationship"
+                value="{{ item.relationship }}"
+                [(ngModel)]="item.relationship"
+              />
+              <br />
+              <label for="title">Title: </label>
+              <input
+                id="title"
+                type="text"
+                formControlName="cf_title"
+                value="{{ item.title }}"
+                [(ngModel)]="item.title"
+              />
+              <br />
+              <label for="isEmr">IsRef: </label>
+              <input
+                id="isEmr"
+                type="text"
+                formControlName="cf_isEmer"
+                placeholder="enter yer or no"
+                value="{{ item.relationship }}"
+                [(ngModel)]="item.relationship"
+              />
+              <br />
+              <label for="isref">IsEmr: </label>
+              <input
+                id="isref"
+                type="text"
+                formControlName="cf_isRef"
+                value="{{ item.isEmergency }}"
+                [(ngModel)]="item.isEmergency"
+              />
+              <br />
+              <button>Save</button>
+            </form>
+            <button (click)="cancelCon()">Cancel</button>
+          </div>
+        </div>
+        <button (click)="showConEdit()">Edit</button>
+      </div>
+    </div>
+
+    <div class="masonry-grid__item">
+      <h3>Document</h3>
+      <div *ngFor="let d of pDoc">
+        <div class="info">
+          {{ d.name }}
+          <label for="id">: </label>
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="{{ this.s3Url + d.path }}"
+            data-lightbox="image-1"
+            data-title="My caption"
+          >
+            <button>view file</button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,91 @@
+<app-employee-home></app-employee-home>
+<div class="row">
+  <div class="col-md-7">
+    <div class="background">
+      <div class="left">
+        <h3>Visa Status</h3>
+        <div *ngIf="currentStatus == 'Rejected' && uploaded == false">
+          Your last document [{{ currentStep }}] has been rejected, please start
+          over!
+        </div>
+
+        <div *ngIf="hrComment != null && hrComment != ''">
+          Comment from HR: {{ hrComment }}
+        </div>
+        <div *ngIf="allSet == false && uploadedAndWait == false">
+          <div>
+            <h3 style="color: green">Current Status</h3>
+            <h4
+              *ngIf="
+                currentStep == 'OPT-receipt' && currentStatus == 'Pending';
+                else elseBlock
+              "
+            >
+              Get started
+            </h4>
+            <ng-template #elseBlock>
+              <h4>{{ currentStep }} {{ currentStatus }}</h4></ng-template
+            >
+          </div>
+          <br />
+          <div>
+            <h3 style="color: grey">Next Step</h3>
+            <div *ngIf="needRenew == true">
+              <h5>
+                Your EAD is going to expire in less than 100 days, please
+                download and fill i-983 form!
+              </h5>
+            </div>
+
+            <h6 *ngIf="showI983Form == true">
+              <a href="{{ s3FillableUrl }}" target="popup">I-983 Form</a>
+              <br />
+              <a href="{{ s3InstructionUrl }}" target="popup"
+                >I-983 Instruction</a
+              >
+            </h6>
+
+            <div *ngIf="uploaded == false">
+              <h4>Upload: {{ nextStep }}</h4>
+
+              <label for="receipt"></label>
+              <input
+                id="receipt"
+                type="file"
+                (change)="onUpload($any($event.target).files)"
+                name="files"
+              />
+            </div>
+            <h5>submit when 100% uploaded</h5>
+            <h4>{{ this.progress + " %" }}</h4>
+            <div>
+              <button (click)="onSubmit()">submit</button>
+            </div>
+
+            <div *ngIf="uploaded">
+              <h3>Please wait for HR to review!</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="uploadedAndWait == true">
+        <h3 style="color: green">Current Status</h3>
+        <h4>{{ currentStep }} {{ currentStatus }}</h4>
+        <h3 style="color: grey">Next Step</h3>
+        <h4>Please wait for HR to review!</h4>
+      </div>
+
+      <div *ngIf="allSet == true">
+        <h4>{{ currentStep }} {{ currentStatus }}</h4>
+        <h4>All set! Congratulation!</h4>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-5">
+    <h4>Documents</h4>
+    <div *ngFor="let doc of visaDocument">
+      <a href="{{ doc.docUrl }}" target="popup">{{ doc.docName }}</a>
+    </div>
+  </div>
+</div>

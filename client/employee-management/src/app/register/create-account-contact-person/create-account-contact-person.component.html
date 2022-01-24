@@ -1,0 +1,82 @@
+<form (ngSubmit)="onSubmit()">
+  <h3>Reference</h3>
+  <form [formGroup]="referenceForm">
+    <label for="firstname">First Name: </label>
+    <input id="firstname" type="text" formControlName="re_firstname" />
+    <br />
+    <label for="lastname">Last Name: </label>
+    <input id="lastname" type="text" formControlName="re_lastname" />
+    <br />
+    <label for="middlename">Middle Name: </label>
+    <input id="middlename" type="text" formControlName="re_middlename" />
+    <br />
+    <label for="cellphone">CellPhone: </label>
+    <input id="cellphone" type="text" formControlName="re_cellphone" />
+    <br />
+    <label for="email">Email: </label>
+    <input id="email" type="text" formControlName="re_email" />
+    <br />
+    <label for="address1">Address Line1: </label>
+    <input id="address1" type="text" formControlName="re_address1" />
+    <br />
+    <label for="address2">Address Line2: </label>
+    <input id="address2" type="text" formControlName="re_address2" />
+    <br />
+    <label for="city">City: </label>
+    <input id="city" type="text" formControlName="re_city" />
+    <br />
+    <label for="zipcode">Zipcode: </label>
+    <input id="zipcode" type="text" formControlName="re_zipcode" />
+    <br />
+    <label for="state">State: </label>
+    <input id="state" type="text" formControlName="re_state" />
+    <br />
+    <label for="relationship">Relationship: </label>
+    <input id="relationship" type="text" formControlName="re_relationship" />
+    <br />
+  </form>
+
+  <h3>Emergency Contact</h3>
+  <form [formGroup]="emergencyForm">
+    <label for="firstname">First Name(*): </label>
+    <input id="firstname" type="text" formControlName="em_firstname" />
+    <div *ngIf="submitted && ef['em_firstname'].errors">
+      <div *ngIf="ef['em_firstname'].errors">First name is required.</div>
+    </div>
+    <br />
+    <label for="lastname">Last Name(*): </label>
+    <input id="lastname" type="text" formControlName="em_lastname" />
+    <div *ngIf="submitted && ef['em_lastname'].errors">
+      <div *ngIf="ef['em_lastname'].errors">Last name is required.</div>
+    </div>
+    <br />
+    <label for="middlename">Middle Name: </label>
+    <input id="middlename" type="text" formControlName="em_middlename" />
+    <br />
+    <label for="cellphone">Cell Phone(*): </label>
+    <input id="cellphone" type="text" formControlName="em_cellphone" />
+    <div *ngIf="submitted && ef['em_cellphone'].errors">
+      <div *ngIf="ef['em_cellphone'].errors">Cell phone is required.</div>
+    </div>
+    <br />
+    <label for="email">Email(*): </label>
+    <input id="email" type="text" formControlName="em_email" />
+    <div *ngIf="submitted && ef['em_email'].errors">
+      <div *ngIf="ef['em_email'].errors">Email is required.</div>
+    </div>
+    <br />
+    <label for="zipcode">Zipcode(*): </label>
+    <input id="zipcode" type="text" formControlName="em_zipcode" />
+    <div *ngIf="submitted && ef['em_zipcode'].errors">
+      <div *ngIf="ef['em_zipcode'].errors">Zipcode is required.</div>
+    </div>
+    <br />
+    <label for="relationship">Relationship(*): </label>
+    <input id="relationship" type="text" formControlName="em_relationship" />
+    <div *ngIf="submitted && ef['em_relationship'].errors">
+      <div *ngIf="ef['em_relationship'].errors">Relationship is required.</div>
+    </div>
+    <br />
+  </form>
+  <button onclick="onSubmit()">Submit</button>
+</form>

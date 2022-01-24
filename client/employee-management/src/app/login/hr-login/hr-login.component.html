@@ -1,0 +1,45 @@
+<h3>LOGIN</h3>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <!-- username input -->
+  <label for="usernameBox">Username: </label>
+  <input
+    id="usernameBox"
+    type="text"
+    placeholder="Username"
+    formControlName="username"
+    [ngClass]="{ 'is-invalid': submitted && f['username'].errors }"
+  />
+  <div *ngIf="submitted && f['username'].errors">
+    <div *ngIf="f['username'].errors">Username is required.</div>
+  </div>
+  <br />
+  <!-- password -->
+  <label for="passwordBox">Password: </label>
+  <input
+    id="passwordBox"
+    type="password"
+    placeholder="Password"
+    formControlName="password"
+    [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
+  />
+  <div *ngIf="submitted && f['password'].errors">
+    <div *ngIf="f['password'].errors">Password is required.</div>
+  </div>
+
+  <br />
+  <!-- radio button for login as hr -->
+  <input id="isHr" type="checkbox" formControlName="isHr" />
+  <label for="isHr">Login as HR</label>
+  <!-- submit button -->
+  <button>Submit</button>
+</form>
+
+<!-- <div class="form-group">
+  <div>
+    <input
+      type="file"
+      (change)="onUpload($any($event.target).files)"
+      name="files"
+    />
+  </div>
+</div> -->

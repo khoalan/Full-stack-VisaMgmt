@@ -1,0 +1,85 @@
+<app-hr-home></app-hr-home>
+<br />
+<br />
+<h3>Personal Info</h3>
+<img
+  src="{{ userApp.avatar }}"
+  style="max-width: 140px; max-height: 140px"
+  alt="avatar"
+/>
+<br />
+<label for="">Name:</label>
+<input
+  type="text"
+  value="{{
+    userApp.firstname + ' ' + userApp.middlename + ' ' + userApp.lastname
+  }}"
+  disabled
+/>
+<br />
+<label for="">ssn:</label>
+<input type="text" value="{{ userApp.ssn }}" disabled />
+<br />
+<label for="">Date Of Birth:</label>
+<input type="text" value="{{ userApp.dob }}" disabled />
+<br />
+<label for="">gender:</label>
+<input type="text" value="{{ userApp.gender }}" disabled />
+
+<h3>Contact Info</h3>
+<label for="">cellphone:</label>
+<input type="text" value="{{ userApp.cellphone }}" disabled />
+<br />
+<label for="">workphone:</label>
+<input type="text" value="{{ userApp.workphone }}" disabled />
+<br />
+<label for="">address1:</label>
+<input type="text" value="{{ userApp.address1 }}" disabled />
+<br />
+<label for="">address2:</label>
+<input type="text" value="{{ userApp.address2 }}" disabled />
+<br />
+<label for="">city:</label>
+<input type="text" value="{{ userApp.city }}" disabled />
+<br />
+<label for="">state:</label>
+<input type="text" value="{{ userApp.state }}" disabled />
+<br />
+<label for="">zipcode:</label>
+<input type="text" value="{{ userApp.zipcode }}" disabled />
+<br />
+<label for="">email:</label>
+<input type="text" value="{{ userApp.email }}" disabled />
+
+<h3>Car Info</h3>
+<label for="">licensenum:</label>
+<input type="text" value="{{ userApp.licensenum }}" disabled />
+<br />
+<label for="">expirationdate:</label>
+<input type="text" value="{{ userApp.expirationdate }}" disabled />
+<br />
+<label for="">carnum:</label>
+<input type="text" value="{{ userApp.carnum }}" disabled />
+
+<div *ngIf="!noDriverDoc">
+  <a href="{{ userApp.driverLicense }} " target="popup">Driver license</a>
+</div>
+<h3>Contact Info</h3>
+>
+<label for="">address1:</label>
+<input type="text" value="{{ userApp.address1 }}" disabled />
+<br />
+<label for="">address2:</label>
+<input type="text" value="{{ userApp.address2 }}" disabled />
+<br />
+<label for="">city:</label>
+<input type="text" value="{{ userApp.city }}" disabled />
+<br />
+<label for="">state:</label>
+<input type="text" value="{{ userApp.state }}" disabled />
+<br />
+<label for="">zipcode:</label>
+<input type="text" value="{{ userApp.zipcode }}" disabled />
+<br />
+<label for="">Email:</label>
+<input type="text" value="emergency@gmail.com" disabled />

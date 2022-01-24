@@ -1,0 +1,56 @@
+<h3>Basic Information</h3>
+<form [formGroup]="basicInfoForm" (ngSubmit)="onSubmit()">
+  <label for="firstname">First Name(*)</label>
+  <input id="firstname" type="text" formControlName="firstname" />
+  <div *ngIf="submitted && f['firstname'].errors">
+    <div *ngIf="f['firstname'].errors">Firstname is required.</div>
+  </div>
+  <br />
+
+  <label for="lastname">Last Name(*)</label>
+  <input id="lastname" type="text" formControlName="lastname" />
+  <div *ngIf="submitted && f['lastname'].errors">
+    <div *ngIf="f['lastname'].errors">Lastname is required.</div>
+  </div>
+  <br />
+
+  <label for="middlename">Middle Name</label>
+  <input id="middlename" type="text" formControlName="middlename" />
+  <br />
+
+  <label for="ssn">SSN(*)</label>
+  <input id="ssn" type="text" formControlName="ssn" />
+  <div *ngIf="submitted && f['ssn'].errors">
+    <div *ngIf="f['ssn'].errors">SSN is required.</div>
+  </div>
+  <br />
+
+  <label for="dob">Date of Birth(*)</label>
+  <input id="dob" type="date" formControlName="dob" />
+  <div *ngIf="submitted && f['dob'].errors">
+    <div *ngIf="f['dob'].errors">Date of Birth is required.</div>
+  </div>
+  <br />
+
+  <label for="gender">Gender(*)</label>
+  <select id="gender" formControlName="gender">
+    <option value="Prefer not to answer" selected>Prefer not to answer</option>
+    <option value="male">Male</option>
+    <option value="female">Female</option>
+  </select>
+  <br />
+  <div>
+    <label for="avatar">UploadAvatar</label>
+    <!-- avatar upload -->
+    <input
+      id="avatar"
+      type="file"
+      (change)="onUpload($any($event.target).files)"
+      name="files"
+    />
+    <!--default avatar-->
+  </div>
+  <p *ngIf="message">{{ message }}</p>
+  <br />
+  <button>Next</button>
+</form>

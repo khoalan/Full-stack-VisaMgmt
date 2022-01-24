@@ -1,0 +1,99 @@
+<h3>Contact Information</h3>
+<form [formGroup]="contactInfoForm">
+
+    <label for="cellphone">Cell Phone(*)</label>
+    <input id="cellphone" type="text" formControlName="cellphone"/>
+    <div *ngIf="submitted && f['cellphone'].errors">
+        <div *ngIf="f['cellphone'].errors"> Cellphone is required.</div>
+    </div>
+    <br>
+    
+    <label for="workphone">Work Phone</label>
+    <input id="workphone" type="text" formControlName="workphone"/>
+    <br>
+    
+    <label for="email">Email(*)</label>
+    <input id="email" type="text" formControlName="email" readonly/>
+    <br>
+    <div>
+        <button (click)="addAddress()">Add Address</button>
+        <button (click)="removeAddress()">Remove Address</button>
+    </div>
+
+    <!-- <form [formGroup]="addressInfoForm">
+        <tr *ngFor="let address of addresslist">
+            <label for="address1">Address Line1(*)</label>
+            <input id="address1" type="text" formControlName="address1">
+            <div *ngIf="submitted && af['address1'].errors">
+                <div *ngIf="af['address1'].errors"> Address1 is required.</div>
+            </div>
+            <br>
+            <label for="address2">Address Line2</label>
+            <input id="address2" type="text" formControlName="address2">
+            <br>
+            <label for="city">City(*)</label>
+            <input id="city" type="text" formControlName="city">
+            <div *ngIf="submitted && af['city'].errors">
+                <div *ngIf="af['city'].errors"> City is required.</div>
+            </div>
+            <br>
+            <label for="state">State(*)</label>
+            <input id="state" type="text" formControlName="state">
+            <div *ngIf="submitted && af['state'].errors">
+                <div *ngIf="af['state'].errors"> State is required.</div>
+            </div>
+            <br>
+            <label for="zipcode">Zip code(*)</label>
+            <input id="zipcode" type="text" formControlName="zipcode">
+            <div *ngIf="submitted && af['zipcode'].errors">
+                <div *ngIf="af['zipcode'].errors"> Zipcode is required.</div>
+            </div>
+            <br>
+        </tr>
+    </form> -->
+
+    <form #addressForm="ngForm">
+        <!-- some code here - see full code at the end of this tutorial -->
+         <section *ngFor="let address of addresslist; let i = index;">
+            <!-- input fields inside the *ngFor -->
+               <label>Address Line1(*)</label>
+               <input type="text" [(ngModel)]="address.address1"
+                 name="address1_{{i}}"/>
+                <div *ngIf="submitted && address.address1 == ''">
+                    <div *ngIf="address.address1 == ''"> Address Line1 is required</div>
+                </div>
+                <br>
+                <label>Address Line2</label>
+                <input type="text" [(ngModel)]="address.address2" name="address2_{{i}}"/>
+                <br>
+                
+                <label>City(*)</label>
+                <input type="text" [(ngModel)]="address.city" name="city_{{i}}"/>
+                <div *ngIf="submitted && address.city == ''">
+                    <div *ngIf="address.city == ''"> City is required</div>
+                </div>
+                <br>
+
+                <label>State(*)</label>
+                <input type="text" [(ngModel)]="address.state" name="state_{{i}}"/>
+                <div *ngIf="submitted && address.state == ''">
+                    <div *ngIf="address.state == ''"> State is required</div>
+                </div>
+                <br>
+
+                <label>Zip code(*)</label>
+                <input type="text" [(ngModel)]="address.zipcode" name="zipcode_{{i}}"/>
+                <div *ngIf="submitted && address.zipcode == ''">
+                    <div *ngIf="address.zipcode == ''"> Zip code is required</div>
+                </div>
+                <br>
+         </section>
+    </form>
+
+
+    <br>
+    <form (ngSubmit)="onSubmit()">
+        <button >Next</button>
+    </form>
+    
+</form>
